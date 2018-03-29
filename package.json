@@ -1,0 +1,68 @@
+{
+  "name": "@uirouter/angular-hybrid",
+  "version": "4.0.0",
+  "scripts": {
+    "example": "cd example && npm i && npm start",
+    "clean": "shx rm -rf lib _bundles",
+    "compile": "npm run clean && ngc",
+    "build": "run-s clean compile bundle fixmaps:*",
+    "bundle": "rollup -c && rollup -c --environment MINIFY",
+    "fixmaps:lib": "tweak_sourcemap_paths -a --include 'lib/**/*.js.map' 'lib-esm/**/*.js.map'",
+    "fixmaps:bundle": "tweak_sourcemap_paths -p ../src --include '_bundles/**/*.js.map'",
+    "release": "release --deps @uirouter/core @uirouter/angular @uirouter/angularjs",
+    "test": "npm run build",
+    "test:downstream": "npm run build && test_downstream_projects",
+    "prepublishOnly": "npm run build"
+  },
+  "license": "MIT",
+  "dependencies": {
+    "@uirouter/angular": "1.0.1",
+    "@uirouter/angularjs": "1.0.15",
+    "@uirouter/core": "5.0.17"
+  },
+  "peerDependencies": {
+    "@angular/core": "^4.0.0 || ^5.0.0",
+    "@angular/upgrade": "^4.0.0 || ^5.0.0",
+    "angular": "^1.5.0"
+  },
+  "devDependencies": {
+    "@angular/common": "^4.0.0",
+    "@angular/compiler": "^4.0.0",
+    "@angular/compiler-cli": "^4.0.0",
+    "@angular/core": "^4.0.0",
+    "@angular/platform-browser": "^4.0.0",
+    "@angular/platform-browser-dynamic": "^4.0.0",
+    "@angular/upgrade": "^4.0.0",
+    "@types/angular": "1.6.42",
+    "@types/jquery": "3.3.0",
+    "@uirouter/publish-scripts": "2.3.1",
+    "angular": "1.6.9",
+    "rollup": "0.55.5",
+    "rollup-plugin-commonjs": "8.3.0",
+    "rollup-plugin-node-resolve": "3.0.2",
+    "rollup-plugin-sourcemaps": "0.4.2",
+    "rollup-plugin-uglify": "3.0.0",
+    "rxjs": "5.5.6",
+    "shx": "0.2.2",
+    "typescript": "2.6.2",
+    "zone.js": "0.8.20"
+  },
+  "main": "_bundles/ui-router-angular-hybrid.js",
+  "module": "lib/index.js",
+  "typings": "lib/index.d.ts",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/ui-router/angular-hybrid.git"
+  },
+  "greenkeeper": {
+    "ignore": [
+      "@angular/common",
+      "@angular/compiler",
+      "@angular/compiler-cli",
+      "@angular/core",
+      "@angular/platform-browser",
+      "@angular/platform-browser-dynamic",
+      "@angular/upgrade"
+    ]
+  }
+}
